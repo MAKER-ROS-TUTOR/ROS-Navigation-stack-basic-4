@@ -96,7 +96,7 @@ void ROBOTHardwareInterface::read() {
 	   // joint_right_position  = angles::from_degrees(right_joint_read.response.res[0]);
 	   // joint_left_velocity   = angles::from_degrees(right_joint_read.response.res[1]);
 
-            right_motor_pos += angles::from_degrees((double)right_joint_read.response.res[0]); 
+            right_motor_pos += angles::from_degrees((double)right_joint_read.response.res[0] ); 
             joint_position_[2]=right_motor_pos ; 
             joint_position_[3]=right_motor_pos ; 
 	     
@@ -123,7 +123,7 @@ if more than one joint,
 	  //  joint_right_position  =  angles::from_degrees(left_joint_read.response.res[0]);
 	   // joint_left_velocity   =  angles::from_degrees(left_joint_read.response.res[1]);
 
-              left_motor_pos += angles::from_degrees((double)left_joint_read.response.res[0]); 
+              left_motor_pos += angles::from_degrees((double)left_joint_read.response.res[0] ); 
               joint_position_[0]= left_motor_pos; 
               joint_position_[1]= left_motor_pos;         
 	    
@@ -161,9 +161,9 @@ void ROBOTHardwareInterface::write(ros::Duration elapsed_time) {
 	wbuff[0]=velocity;
     wbuff[1]=velocity >> 8;
 
-    joints_pub.data.clear();
-    joints_pub.data.push_back( velocity );
-    joints_pub.data.push_back( velocity >> 8);
+   // joints_pub.data.clear();
+   // joints_pub.data.push_back( velocity );
+   // joints_pub.data.push_back( velocity >> 8);
 
    
     
@@ -175,7 +175,7 @@ void ROBOTHardwareInterface::write(ros::Duration elapsed_time) {
 	    result = 0 ;// left_motor.writeData(wbuff,2);
 	    //ROS_INFO("Writen successfully result=%d", result);
 	    left_prev_cmd=velocity;
-            ROS_INFO("LEFT wheel command %d , %d" , velocity , velocity>>8 );
+            ROS_INFO("Log1-LEFT wheel command %d , %d" , velocity , velocity>>8 );
     }
     
     velocity=(int)angles::to_degrees(joint_velocity_command_[2]);
@@ -187,9 +187,9 @@ void ROBOTHardwareInterface::write(ros::Duration elapsed_time) {
 	wbuff[0]=velocity;
     wbuff[1]=velocity >> 8;
 
-    joints_pub.data.clear();
-    joints_pub.data.push_back( velocity );
-    joints_pub.data.push_back( velocity >> 8);
+   // joints_pub.data.clear();
+   // joints_pub.data.push_back( velocity );
+   // joints_pub.data.push_back( velocity >> 8);
 
 	//ROS_INFO("joint_velocity_command_[0]=%.2f velocity=%d  B1=%d B2=%d", joint_velocity_command_[0],velocity,wbuff[0],wbuff[1]);
 
@@ -199,7 +199,7 @@ void ROBOTHardwareInterface::write(ros::Duration elapsed_time) {
 	    result = 0; // right_motor.writeData(wbuff,2);
 	    //ROS_INFO("Writen successfully result=%d", result);
 	    right_prev_cmd=velocity;
-           ROS_INFO("RIGHT wheel command %d , %d" , velocity , velocity>>8 );
+           ROS_INFO("Log1-RIGHT wheel command %d , %d" , velocity , velocity>>8 );
     }
 
 		
@@ -256,7 +256,7 @@ void ROBOTHardwareInterface::navStatusCallBack(const actionlib_msgs::GoalStatusA
           ROS_INFO("MoveBase -- The goal was achieved successfully"); 
 
         }
-   //   ROS_INFO("MoveBase Action Message %d" , status_id );
+     ROS_INFO("MoveBase Action Message %d" , status_id );
       
 }
 int main(int argc, char** argv)

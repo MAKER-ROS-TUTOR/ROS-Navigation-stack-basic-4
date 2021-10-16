@@ -10,7 +10,7 @@
     <param name="base_global_planner" value="$(arg base_global_planner)"/>
     <param name="base_local_planner" value="$(arg base_local_planner)"/>  
     
-     <rosparam file="$(find maker_robot)/config/planner.yaml" command="load"/>
+    <rosparam file="$(find maker_robot)/config/planner.yaml" command="load"/>
 
     <rosparam file="$(find maker_robot)/config/common_costmap.yaml" command="load" ns="global_costmap" />
     <rosparam file="$(find maker_robot)/config/common_costmap.yaml" command="load" ns="local_costmap" />
@@ -19,4 +19,6 @@
     <rosparam file="$(find maker_robot)/config/global_costmap.yaml" command="load" ns="global_costmap" /> 
 
   </node> 
+  
 </launch>
+

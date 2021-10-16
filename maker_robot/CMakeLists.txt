@@ -21,6 +21,7 @@ find_package(catkin REQUIRED COMPONENTS
   tf
   tf2
   three_dof_planar_manipulator
+  lino_msgs
 )
 
 ## System dependencies are found with CMake's conventions

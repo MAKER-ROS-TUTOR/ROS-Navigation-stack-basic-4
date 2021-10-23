@@ -1,0 +1,159 @@
+<?xml version="1.0" ?>
+<robot name="mobile_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find maker_robot)/urdf/materials.xacro" />
+<material name="blue">
+	    <color rgba="0 0 0.8 0.7"/>
+</material>
+<material name="red">
+	    <color rgba="0.8 0 0 0.95"/>
+</material>
+<link name="base_link">
+ <collision>
+          <origin rpy="0 0 0" xyz="0 0 0.0005"/>
+          <geometry>
+            <box size="0.54 0.55 0.001"/>
+          </geometry>
+  </collision>
+</link>
+
+<joint name="base_link_joint" type="fixed">
+        <origin rpy="0 0 -1.5708" xyz="0 0 0.09" />
+        <parent link="base_link" />
+        <child link="base_plate" />
+</joint>
+
+<link name="base_plate">
+ 
+  <visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://maker_robot/meshes_4/base_plate.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="blue"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://maker_robot/meshes_4/base_plate.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_rear_wheel">
+ 
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.175 0.17 -0.01"/>
+    <geometry>
+      <mesh filename="package://maker_robot/meshes_4/right_front_wheel.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.175 0.17 -0.01"/>
+    <geometry>
+      <mesh filename="package://maker_robot/meshes_4/right_front_wheel.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_front_wheel">
+  
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.175 -0.18 -0.01"/>
+    <geometry>
+      <mesh filename="package://maker_robot/meshes_4/right_rear_wheel.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.175 -0.18 -0.01"/>
+    <geometry>
+      <mesh filename="package://maker_robot/meshes_4/right_rear_wheel.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_front_wheel">
+ 
+  <visual>
+    <origin rpy="0 0 0" xyz="0.175 0.17 -0.01"/>
+    <geometry>
+      <mesh filename="package://maker_robot/meshes_4/left_front_wheel.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.175 0.17 -0.01"/>
+    <geometry>
+      <mesh filename="package://maker_robot/meshes_4/left_front_wheel.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_rear_wheel">
+  
+  <visual>
+    <origin rpy="0 0 0" xyz="0.175 -0.18 -0.01"/>
+    <geometry>
+      <mesh filename="package://maker_robot/meshes_4/left_rear_wheel.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.175 -0.18 -0.01"/>
+    <geometry>
+      <mesh filename="package://maker_robot/meshes_4/left_rear_wheel.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="right_rear_wheel_joint" type="continuous">
+  <origin rpy="0 0 0" xyz="0.175 -0.17 0.01"/>
+  <parent link="base_plate"/>
+  <child link="right_rear_wheel"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+</joint>
+
+<joint name="right_front_wheel_joint" type="continuous">
+  <origin rpy="0 0 0" xyz="0.175 0.18 0.01"/>
+  <parent link="base_plate"/>
+  <child link="right_front_wheel"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+</joint>
+
+<joint name="left_rear_wheel_joint" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.175 -0.17 0.01"/>
+  <parent link="base_plate"/>
+  <child link="left_rear_wheel"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+</joint>
+
+<joint name="left_front_wheel_joint" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.175 0.18 0.01"/>
+  <parent link="base_plate"/>
+  <child link="left_front_wheel"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+</joint>
+<joint name="laser_joint" type="fixed">
+        <origin xyz="0 0.040 0.10" rpy="0 0 1.5708" />
+        <parent link="base_plate" />
+        <child link="laser" />
+    </joint>
+
+    <link name="laser">
+    <visual>
+      <origin rpy="0 0 -1.5708" xyz="0.084 -0.242 -0.07"/>
+      <geometry>
+        <mesh filename="package://maker_robot/stl/RpLidar.stl" scale="0.001 0.001 0.001"/> 
+      </geometry>
+      <material name="red"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz=" 0.084 0.242 -0.1"  />
+      <geometry>
+        <mesh filename="package://maker_robot/stl/RpLidar.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+    </link>  
+</robot>
